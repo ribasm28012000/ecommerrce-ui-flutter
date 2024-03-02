@@ -5,7 +5,7 @@ import '../controllers/navigation_controller.dart';
 import '../utils/strings.dart';
 import '../widgets/common_widgets.dart';
 import '../widgets/drawers.dart';
-import 'card.dart';
+import 'cart.dart';
 import 'detail_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,7 +68,11 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.only(right: 25, top: 10),
             child: IconButton(
                 onPressed: () {
-                  contextConnectwithRoute(context, const CheckOutScreen());
+                  contextConnectwithRoute(
+                      context,
+                      CheckOutScreen(
+                        cartContainerData: popularPlants,
+                      ));
                 },
                 icon: SvgPicture.asset(
                   'assets/svg/cart_outline.svg',

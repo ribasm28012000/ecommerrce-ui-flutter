@@ -7,4 +7,10 @@ class Strings {
   static const String accesoryCategoryLabelText = "Accessories";
   static const String otherCategoryLabelText = "Other";
   static const String searchHintText = "Find your plant";
+  static const String homepageSubMenuCartItems = "Item Details";
+  static const String homepageSubMenuOrderSummary = "Order Summary";
+  static const String itemDetailText = "Item Details";
+  static const String itemDiscountText = "Discount";
+  static const String totalChargeText = "Total Charge";
+  
 }

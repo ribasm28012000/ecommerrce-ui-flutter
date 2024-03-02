@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:horticulture_management/utils/colors.dart';
+import 'package:horticulture_management/widgets/buttons.dart';
 
 class CategoryContainer extends StatelessWidget {
   final String labelText;
@@ -189,6 +190,126 @@ class PopularPlantBottomContainer extends StatelessWidget {
                 ),
               )
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CartItemContainer extends StatefulWidget {
+  final Map cartContainerData;
+  final VoidCallback negativeClick;
+  final VoidCallback positiveClick;
+  final String countCart;
+
+  const CartItemContainer(
+      {super.key,
+      required this.cartContainerData,
+      required this.negativeClick,
+      required this.positiveClick,
+      required this.countCart});
+
+  @override
+  State<CartItemContainer> createState() => _CartItemContainerState();
+}
+
+class _CartItemContainerState extends State<CartItemContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: const BoxDecoration(
+        color: Color.fromRGBO(255, 255, 255, 1),
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+      ),
+      width: MediaQuery.of(context).size.width * 0.90,
+      height: 105,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade400,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(15),
+              ),
+            ),
+            height: 90,
+            width: MediaQuery.of(context).size.width * 0.20,
+            child: Center(
+                child: SvgPicture.asset(
+              widget.cartContainerData["plantImage"],
+              height: 50,
+              width: 50,
+            )),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
+            ),
+            height: 90,
+            width: MediaQuery.of(context).size.width * 0.40,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    alignment: Alignment.topLeft,
+                    margin: const EdgeInsets.only(left: 10, top: 8),
+                    child: Text(
+                      widget.cartContainerData["bottomContainerLabel"],
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.bold),
+                    )),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    "\$ ${widget.cartContainerData["plantAmount"]}",
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.normal),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
+            ),
+            height: 90,
+            width: MediaQuery.of(context).size.width * 0.20,
+            child: Center(
+              child: Row(children: [
+                CustomButton(
+                    buttonIcon: 'assets/svg/negative_button.svg',
+                    onTap: widget.negativeClick),
+                Container(
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(5),
+                    ),
+                  ),
+                  height: 20,
+                  width: 20,
+                  child: Center(child: Text(widget.countCart)),
+                ),
+                CustomButton(
+                    buttonIcon: 'assets/svg/positive_button.svg',
+                    onTap: widget.positiveClick)
+              ]),
+            ),
           ),
         ],
       ),
