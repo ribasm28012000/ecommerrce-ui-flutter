@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-import 'screens/homepage.dart';
+import 'screens/home_page.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

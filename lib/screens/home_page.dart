@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:horticulture_management/widgets/common_widgets.dart';
 
+import '../controllers/navigation_controller.dart';
 import '../utils/strings.dart';
+import '../widgets/common_widgets.dart';
 import '../widgets/drawers.dart';
+import 'card.dart';
+import 'detail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -64,7 +67,9 @@ class _HomePageState extends State<HomePage> {
           Container(
             margin: const EdgeInsets.only(right: 25, top: 10),
             child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  contextConnectwithRoute(context, const CheckOutScreen());
+                },
                 icon: SvgPicture.asset(
                   'assets/svg/cart_outline.svg',
                   height: 20,
@@ -159,14 +164,26 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       children: popularPlants.map((plant) {
                         var index = popularPlants.indexOf(plant);
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          child: PopularPlantContainer(
-                              popularContainerData: plant,
-                              addCartClick: () {
-                                print(plant["bottomContainerLabel"]);
-                              }),
+                        return GestureDetector(
+                          onTap: () {
+                            // contextConnectwithRoute(
+                            //     context, const PlantDetailView());
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 10),
+                            child: PopularPlantContainer(
+                                popularContainerData: plant,
+                                addCartClick: () {
+                                  contextConnectwithRoute(
+                                      context,
+                                      PlantDetailView(
+                                        plantDetail: plant,
+                                      ));
+                                  debugPrint(index.toString());
+                                  debugPrint(plant["bottomContainerLabel"]);
+                                }),
+                          ),
                         );
                       }).toList(),
                     ),
